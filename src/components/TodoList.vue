@@ -1,17 +1,21 @@
 
 <template>
-  <ul id="todo-list">
-    <li>
-      Sample Task 1
-      <button type="button">Delete</button>
-    </li>
-    <li class="completed">
-      Sample Task 2
-      <button type="button">Delete</button> 
-    </li>
-    <li>
-      Sample Task 3
-      <button type="button">Delete</button>
+  <ul>
+    <li v-for="todo in todoList" :key="todo.id">
+      {{ todo.msg }}
+      <button type="button" @click="todoUpdate(todo.id)">Delete</button>
     </li>
   </ul>
 </template>
+
+<script>
+  export default {
+    props : ["todoList"], // 부모에서 케밥 케이스로 던지면 자식에선 카멜 케이스로 받기
+    
+    methods : {
+      todoUpdate(id) {
+        this.$emit("todoUpdate", id)
+      }
+    }
+  }
+</script>
